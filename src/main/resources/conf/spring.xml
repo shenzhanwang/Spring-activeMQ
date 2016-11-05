@@ -14,17 +14,30 @@
 	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
 		<property name="brokerURL" value="tcp://localhost:61616"/>
 	</bean>
-	<bean id="mailDestination" class="org.apache.activemq.command.ActiveMQQueue">
+	<bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
 		<constructor-arg value="myqueue" />
 	</bean>
-	
+	<!--这个是主题目的地，一对多的-->  
+	<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">  
+	    <constructor-arg value="mytopic"/>  
+	</bean>  
 	<bean id="jmsTemplate" name="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="receiveTimeout" value="10000" />
-		<property name="defaultDestination" ref="mailDestination" />
+		<property name="defaultDestination" ref="queueDestination" />
+		<!-- 非pub/sub模型（发布/订阅），即队列模式 -->
+        <property name="pubSubDomain" value="false" />
 	</bean>
 	
-	<bean id="mailListener" class="activeMQ.listener.MailListener" />
+	<bean id="jmsTopicTemplate" name="jmsTopicTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="receiveTimeout" value="10000" />
+		<property name="defaultDestination" ref="topicDestination" />
+		<!-- 非pub/sub模型（发布/订阅），即订阅模式 -->
+        <property name="pubSubDomain" value="true" />
+	</bean>
+	
+	<bean id="mailListener" class="activeMQ.listener.QueueListener" />
 	<bean id="mailListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
 		<property name="delegate" ref="mailListener" />
 		<property name="defaultListenerMethod" value="displayMail" />
@@ -36,6 +49,22 @@
 		<property name="sessionTransacted" value="true" />
 		<property name="concurrentConsumers" value="1"/>
 	</bean>
+	
+	<bean id="topicListener" class="activeMQ.listener.TopicListener" />
+	<bean id="topicListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+		<property name="delegate" ref="topicListener" />
+		<property name="defaultListenerMethod" value="displayTopic" />
+	</bean>
+	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destinationName" value="mytopic" />
+		<property name="messageListener" ref="topicListenerAdapter" />
+		<property name="sessionTransacted" value="true" />
+		<property name="concurrentConsumers" value="1"/>
+		<!-- 非pub/sub模型（发布/订阅），即订阅模式 -->
+		<property name="pubSubDomain" value="true" />
+	</bean>
+	
 	<tx:annotation-driven />
 	<bean id="transactionManager" class="org.springframework.jms.connection.JmsTransactionManager">
 		<property name="connectionFactory">

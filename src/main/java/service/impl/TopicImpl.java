@@ -9,19 +9,17 @@ import org.springframework.transaction.annotation.Transactional;
 import po.Mail;
 import service.Producer;
 @Transactional
-@Service("producer")
-public class ProducerImpl implements Producer{
+@Service("topic")
+public class TopicImpl implements Producer{
 	@Autowired
-	@Qualifier("jmsTemplate")
-	private JmsTemplate jmsTemplate;
+	@Qualifier("jmsTopicTemplate")
+	private JmsTemplate jmsTopicTemplate;
 	
 	public void setJmsTemplate(JmsTemplate jmsTemplate) {
-		this.jmsTemplate = jmsTemplate;
+		this.jmsTopicTemplate = jmsTemplate;
 	}
-	
 	public void sendMail(Mail mail) {
-		jmsTemplate.convertAndSend(mail);
-		
+		jmsTopicTemplate.convertAndSend(mail);
 	}
 
 }
