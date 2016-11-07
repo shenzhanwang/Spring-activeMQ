@@ -21,7 +21,6 @@ public class ProducerImpl implements Producer{
 	
 	public void sendMail(Mail mail) {
 		jmsTemplate.convertAndSend(mail);
-		
 	}
 
 }

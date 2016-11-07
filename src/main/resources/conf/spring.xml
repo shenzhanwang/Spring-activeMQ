@@ -37,28 +37,56 @@
         <property name="pubSubDomain" value="true" />
 	</bean>
 	
-	<bean id="mailListener" class="activeMQ.listener.QueueListener" />
-	<bean id="mailListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
-		<property name="delegate" ref="mailListener" />
+	<bean id="mailListener1" class="activeMQ.listener.QueueListener1" />
+	<bean id="mailListenerAdapter1" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+		<property name="delegate" ref="mailListener1" />
 		<property name="defaultListenerMethod" value="displayMail" />
 	</bean>
 	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destinationName" value="myqueue" />
-		<property name="messageListener" ref="mailListenerAdapter" />
+		<property name="messageListener" ref="mailListenerAdapter1" />
 		<property name="sessionTransacted" value="true" />
 		<property name="concurrentConsumers" value="1"/>
 	</bean>
 	
-	<bean id="topicListener" class="activeMQ.listener.TopicListener" />
-	<bean id="topicListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
-		<property name="delegate" ref="topicListener" />
+	<bean id="mailListener2" class="activeMQ.listener.QueueListener2" />
+	<bean id="mailListenerAdapter2" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+		<property name="delegate" ref="mailListener2" />
+		<property name="defaultListenerMethod" value="displayMail" />
+	</bean>
+	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destinationName" value="myqueue" />
+		<property name="messageListener" ref="mailListenerAdapter2" />
+		<property name="sessionTransacted" value="true" />
+		<property name="concurrentConsumers" value="1"/>
+	</bean>
+	
+	<bean id="topicListener1" class="activeMQ.listener.TopicListener1" />
+	<bean id="topicListenerAdapter1" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+		<property name="delegate" ref="topicListener1" />
 		<property name="defaultListenerMethod" value="displayTopic" />
 	</bean>
 	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destinationName" value="mytopic" />
-		<property name="messageListener" ref="topicListenerAdapter" />
+		<property name="messageListener" ref="topicListenerAdapter1" />
+		<property name="sessionTransacted" value="true" />
+		<property name="concurrentConsumers" value="1"/>
+		<!-- 非pub/sub模型（发布/订阅），即订阅模式 -->
+		<property name="pubSubDomain" value="true" />
+	</bean>
+	
+	<bean id="topicListener2" class="activeMQ.listener.TopicListener2" />
+	<bean id="topicListenerAdapter2" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+		<property name="delegate" ref="topicListener2" />
+		<property name="defaultListenerMethod" value="displayTopic" />
+	</bean>
+	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destinationName" value="mytopic" />
+		<property name="messageListener" ref="topicListenerAdapter2" />
 		<property name="sessionTransacted" value="true" />
 		<property name="concurrentConsumers" value="1"/>
 		<!-- 非pub/sub模型（发布/订阅），即订阅模式 -->

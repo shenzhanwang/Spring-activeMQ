@@ -3,6 +3,7 @@ package controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import po.Mail;
 import service.Producer;
@@ -17,16 +18,21 @@ public class ActiveMQController {
 	@Autowired
 	TopicImpl topic;
 	@RequestMapping(value="/produce",produces = {"application/json;charset=UTF-8"})
-	public String produce(){
+	@ResponseBody
+	public void produce(){
 		for(int i=0;i<10;i++)
-			producer.sendMail(new Mail("1","www",i));
-		return "a";
+			producer.sendMail(new Mail("生产者","www",i));
 	}
 	
 	@RequestMapping(value="/topic",produces = {"application/json;charset=UTF-8"})
-	public String topic(){
+	@ResponseBody
+	public void topic(){
 		for(int i=0;i<10;i++)
-			topic.sendMail(new Mail("qqq","zzz",i));
-		return "a";
+			topic.sendMail(new Mail("发布话题","zzz",i));
+	}
+	
+	@RequestMapping("demo")
+	public String demo(){
+		return "demo";
 	}
 }
