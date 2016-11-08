@@ -28,7 +28,8 @@ public class ActiveMQController {
 	@RequestMapping(value="/topic",produces = {"application/json;charset=UTF-8"})
 	@ResponseBody
 	public void topic(@ModelAttribute("mail")Mail mail){
-			topic.sendMail(mail);
+		System.out.println("向话题mytopic发布一条消息:"+mail.toString());
+		topic.sendMail(mail);
 	}
 	
 	@RequestMapping("demo")
