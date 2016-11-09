@@ -11,6 +11,7 @@ import service.Producer;
 @Transactional
 @Service("producer")
 public class ProducerImpl implements Producer{
+	
 	@Autowired
 	@Qualifier("jmsTemplate")
 	private JmsTemplate jmsTemplate;

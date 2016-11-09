@@ -18,7 +18,7 @@
 	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 	
 
-<context:component-scan base-package="controller,service.impl" />
+<context:component-scan base-package="controller,service.impl,websocket" />
 <!-- 处理请求时返回json字符串的中文乱码问题 -->
     <mvc:annotation-driven>
         <mvc:message-converters>

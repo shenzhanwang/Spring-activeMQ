@@ -18,6 +18,15 @@
   </head>
   <body>
 <div class="container">
+	<div class="row">
+	  <div class="col-md-12">
+	  		<div id="log-container" class="well" style="height:200px;color: #aaa;background: #333;overflow-y: scroll">
+	  			<div>
+	  			控制台输出:<br>
+        		</div>
+	  		</div>
+	  </div>
+	</div>
   <div class="row">
 	  <div class="col-md-12">
 	  	<div class="panel panel-success">
@@ -107,6 +116,19 @@
 	  });
 	});
 
+</script>
+<script>
+    $(document).ready(function() {
+        // 指定websocket路径
+        var websocket = new WebSocket('ws://localhost:8080/Spring-activeMQ/ws');
+        websocket.onmessage = function(event) {
+       	 var data=JSON.parse(event.data);
+            // 接收服务端的实时日志并添加到HTML页面中
+            $("#log-container div").append(data.text + "<p> </p>");
+            // 滚动条滚动到最低部
+            $("#log-container").scrollTop($("#log-container div").height() - $("#log-container").height());
+        };
+    });
 </script>
   </body>
 </html>
