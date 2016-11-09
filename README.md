@@ -9,11 +9,11 @@
 
  ![alt text](https://github.com/shenzhanwang/Spring-activeMQ/blob/master/%E6%88%AA%E5%9B%BE/QQ%E6%88%AA%E5%9B%BE20161109084315.jpg)
  
-3.填入要发送的消息，点击生产消息可以向消息队列添加一条消息，我们这里添加了四条消息，并观察控制台结果如下 
+3.填入要发送的消息，点击生产消息可以向消息队列添加一条消息，我们这里添加了四条消息，并观察控制台结果如下，表明每个消息只被一个消费者接收； 
 
  ![alt text](https://github.com/shenzhanwang/Spring-activeMQ/blob/master/%E6%88%AA%E5%9B%BE/QQ%E6%88%AA%E5%9B%BE20161109084634.jpg)
  
- 4.重复以上操作发布四条消息，可以看到订阅者的输出如下：
+ 4.重复以上操作发布四条消息，可以看到订阅者的输出如下，表明每个发布的消息可以被所有的订阅者接收：
  
   ![alt text](https://github.com/shenzhanwang/Spring-activeMQ/blob/master/%E6%88%AA%E5%9B%BE/QQ%E6%88%AA%E5%9B%BE20161109084912.jpg)
   
