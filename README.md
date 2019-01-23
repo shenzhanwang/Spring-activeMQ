@@ -3,8 +3,7 @@
 包含的特性如下：  
   
 1.使用时，将war文件放入tomcat的webapps目录下，启动服务器，开启activeMQ，访问http://localhost:8080/Spring-activeMQ/demo  ，我们可以在页面顶端看到一个黑色的控制台，用于监控消息的内容，如下图：
- ![alt text](https://github.com/shenzhanwang/Spring-activeMQ/blob/master/%E6%88%AA%E5%9B%BE/1.jpg)  
- 
+![输入图片说明](http://git.oschina.net/uploads/images/2016/1116/081248_7013fad4_1110335.jpeg "在这里输入图片标题")
 
 2 在项目中，我们为消息的生产者和发布者分别注册了两个消费者和订阅者，当有消息到达activeMQ时，消费者和订阅者会自动获取对应的消息，可以在前端控制台看到结果（前端页面控制台是基于websocket全双工通信协议实现的，可用于将服务器端的信息主动推送到浏览器，在本项目中不做重点介绍）；
 
@@ -17,8 +16,9 @@
    
 5.以上结果表明，向队列生产的每条消息，只能被某一个消费者读取，而发布的消息，可以被每个订阅者重复读取，这是两种模式最大的区别，实际应用中要根据情况来选择。
  
-  ![alt text](https://github.com/shenzhanwang/Spring-activeMQ/blob/master/%E6%88%AA%E5%9B%BE/QQ%E6%88%AA%E5%9B%BE20161109085633.jpg)
-   ![alt text](https://github.com/shenzhanwang/Spring-activeMQ/blob/master/%E6%88%AA%E5%9B%BE/QQ%E6%88%AA%E5%9B%BE20161109085653.jpg)
+ ![输入图片说明](http://git.oschina.net/uploads/images/2016/1116/081301_8afc2c36_1110335.jpeg "在这里输入图片标题")
+
+![输入图片说明](http://git.oschina.net/uploads/images/2016/1116/081309_5446619e_1110335.jpeg "在这里输入图片标题")
 
 ### 附录：个人作品索引目录（持续更新）
 
