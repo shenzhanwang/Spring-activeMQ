@@ -1,27 +1,28 @@
-package service.impl;
+package boot.spring.service.impl;
+
+import javax.jms.Destination;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import po.Mail;
-import service.Producer;
-@Transactional
+import boot.spring.po.Mail;
+import boot.spring.service.Producer;
+
 @Service("producer")
 public class ProducerImpl implements Producer{
 	
 	@Autowired
-	@Qualifier("jmsTemplate")
-	private JmsTemplate jmsTemplate;
+    public JmsMessagingTemplate jmsMessagingTemplate;
 	
-	public void setJmsTemplate(JmsTemplate jmsTemplate) {
-		this.jmsTemplate = jmsTemplate;
+
+	@Override
+	public void sendMail(Destination des, Mail mail) {
+		jmsMessagingTemplate.convertAndSend(des, mail);
 	}
 	
-	public void sendMail(Mail mail) {
-		jmsTemplate.convertAndSend(mail);
-	}
 
 }

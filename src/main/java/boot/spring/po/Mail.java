@@ -1,18 +1,18 @@
-package po;
+package boot.spring.po;
 
 import java.io.Serializable;
 
 public class Mail implements Serializable{
 	
-	private static final long serialVersionUID = -8140693840257585779L;
+	private static final long serialVersionUID = 1L;
 	private String mailId;
 	private String country;
-	private double weight;
+	private Double weight;
 	
 	
 	public Mail() {
 	}
-	public Mail(String mailId, String country, double weight) {
+	public Mail(String mailId, String country, Double weight) {
 		this.mailId = mailId;
 		this.country = country;
 		this.weight = weight;
@@ -29,10 +29,10 @@ public class Mail implements Serializable{
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public double getWeight() {
+	public Double getWeight() {
 		return weight;
 	}
-	public void setWeight(double weight) {
+	public void setWeight(Double weight) {
 		this.weight = weight;
 	}
 	@Override
